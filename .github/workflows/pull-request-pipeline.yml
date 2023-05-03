@@ -1,0 +1,53 @@
+name: Pull request workflow
+on:
+  pull_request:
+    branches:
+      - master
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Setup Vercel CLI
+        run: npm install vercel@latest --global
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v4
+        timeout-minutes: 5
+        with:
+          browser: chrome
+          start: yarn dev --host
+          wait-on: 'http://localhost:5173'
+          record: true
+          parallel: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Vercel environment information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy as preview to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
