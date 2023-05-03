@@ -31,5 +31,5 @@ P.S.: If you want to open Cypress UI, just change from `cypress:run` to `cypress
  - [Prettier](https://prettier.io)
  - [ESLint](https://eslint.org)
  - [TypeScript](https://typescriptlang.org)
- - 
+ 
 And others! :)
