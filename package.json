@@ -1,0 +1,33 @@
+{
+  "name": "react-pipeline",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "author": {
+    "name": "Victor Ribeiro Boechat",
+    "email": "victor2005contato@gmail.com",
+    "url": "https://vboechat-linktree.vercel.app/"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vboechat/eslint-config": "^1.2.1",
+    "@vitejs/plugin-react": "^4.0.0",
+    "cypress": "^12.11.0",
+    "eslint": "^8.38.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2"
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "extends": "@vboechat/eslint-config/lint"
+}
