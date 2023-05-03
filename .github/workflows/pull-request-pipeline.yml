@@ -15,6 +15,7 @@ jobs:
       fail-fast: false
 
     steps:
+      # Build
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -29,6 +30,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      # Test
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         timeout-minutes: 5
@@ -41,6 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Deploy
       - name: Pull Vercel environment information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
