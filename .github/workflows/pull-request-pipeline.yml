@@ -9,12 +9,13 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
-  test:
+  # Checkout, setup Node, Vercel CLI and install dependencies
+  build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2]
+        containers: [ 1, 2 ]
 
     steps:
       - name: Checkout
@@ -31,6 +32,15 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+  # Run e2e tests before deploy
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [ 1, 2 ]
+
+    steps:
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         timeout-minutes: 5
@@ -43,6 +53,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  # Deploy preview to Vercel
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
       - name: Pull Vercel environment information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
