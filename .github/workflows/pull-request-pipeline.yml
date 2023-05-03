@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:
-        containers: [ 1, 2 ]
 
     steps:
       - name: Checkout
