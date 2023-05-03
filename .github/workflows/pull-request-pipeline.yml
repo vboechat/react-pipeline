@@ -11,6 +11,9 @@ env:
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.url }}
     strategy:
       fail-fast: false
 
@@ -50,5 +53,5 @@ jobs:
       - name: Build project artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy as preview to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy as preview to Vercel and configure repo environment
+        run: echo "::set-output name=url::$(yarn vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})"
