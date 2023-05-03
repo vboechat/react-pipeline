@@ -36,7 +36,6 @@ jobs:
       # Test
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
-        timeout-minutes: 5
         with:
           browser: chrome
           start: yarn dev --host
