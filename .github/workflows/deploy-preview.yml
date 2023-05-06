@@ -59,7 +59,7 @@ jobs:
   deploy:
     name: Build and deploy application
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: [install, test]
     environment:
       name: Preview
       url: ${{ env.PREVIEW_URL }}
