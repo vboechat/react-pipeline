@@ -20,6 +20,23 @@ To run tests, you just need to run `npm run cypress:run`, `yarn cypress:run` or 
 
 P.S.: If you want to open Cypress UI, just change from `cypress:run` to `cypress:open`.
 
+### How to make the workflow work in my repo?
+In the workflow file, you can notice 4 secrets:
+
+| Secret             | How to get it                                                |
+|--------------------|--------------------------------------------------------------|
+| CYPRESS_RECORD_KEY | Create a project in Cypress Cloud and select "GitHub Action" |
+| VERCEL_TOKEN       | Create a token in Vercel in your account settings            |
+| VERCEL_ORG_ID      | Read the P.S. 1                                              |
+| VERCEL_PROJECT_ID  | Read the P.S. 1                                              |
+
+After obtaining these values, you can open your GitHub repository settings, go to "Secrets and variables",
+open "Actions" and click "New repository secret".
+
+**P.S. 1:** To obtain this secret, open the project folder, 
+install Vercel CLI and run "vercel link" in your console, a folder named .vercel will be created.
+A file will also be created with the org_id and project_id values. **DON'T SHARE THESE VALUES**
+
 ## Credits
  - [Node.JS](https://nodejs.org/en)
  - [Yarn](https://yarnpkg.com)
