@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/cypress": "^1.1.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vboechat/eslint-config": "^1.2.1",
