@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "types": ["cypress"],
+    "typeRoots": ["node_modules/@types"],
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "module": "ESNext",
     "skipLibCheck": true,
