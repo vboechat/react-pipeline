@@ -45,12 +45,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Build project
+        run: yarn build
+
       - name: Run Cypress tests
         uses: cypress-io/github-action@v4
         with:
+          install: false
           browser: chrome
-          start: yarn dev --host
-          wait-on: 'http://localhost:5173'
+          start: yarn preview --host
+          wait-on: 'http://localhost:4173'
           record: true
           parallel: true
         env:
